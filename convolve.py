@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm 
 
 def convolve(img, kernel, pad=0, stride=1):
-    kernel = np.array([[-1,-1,-1],[-1,3,-1],[-1,-1,-1]])
     channels = 1
     try:
         if img.shape[2]==3: # three channels
@@ -25,13 +24,7 @@ def convolve(img, kernel, pad=0, stride=1):
                 img = c2
             else:
                 img==c2
-
-        if pad<0:
-            raise Exception("Argument pad cannot be less than 0.") 
-
-        if stride<1:
-            raise Exception("Argument stride cannot be less than 1.") 
-        
+            
         img_height = img.shape[0]
         img_width = img.shape[1] 
         kernel_height = kernel.shape[0]
@@ -44,32 +37,32 @@ def convolve(img, kernel, pad=0, stride=1):
         if pad==0:
             padded_img = pad
         else:
-            padded_img = np.zeros((img_height+2*pad, img_width+2*pad))
+            padded_img = np.zeros((img_height+pad*2, img_width+pad*2))
             padded_img[pad:pad+img_height, pad:pad+img_width] = img
 
-        for y in tqdm(range(img_height)):
-            if y > (img_height-kernel_height):
+        for y in tqdm(range(img_width)):
+            if y > (img_width-kernel_width):
                 break
 
             if y%stride==0:
-                for x in range(img_width):
-                    if y > (img_height-kernel_height):
+                for x in range(img_height):
+                    if x > (img_height-kernel_height):
                         break
 
                     if x%stride==0:
-                        out_img[y,x] = (padded_img[y:y+kernel_height, x:x+kernel_width] * kernel).sum()
+                        out_img[x,y] = (padded_img[x:x+kernel_height, y:y+kernel_width] * kernel).sum()
 
         final_img.append(out_img)
     
-    final_img = np.array(final_img).transpose(1,2,0).astype(np.uint8)
+    final_img = np.array(final_img).transpose(1,2,0)
     
     return final_img
 
 
 if __name__=='__main__':
 
-    kernel = np.array([[-1,-1,-1],[-1,3,-1],[-1,-1,-1]])
-    # kernel = np.array([[-1,0,-1],[-1,0,-1],[-1,0,-1]])
+    kernel = np.array([[0,-1,0],[-1,5,-1],[0,-1,0]])
+
     img = cv2.imread("/home/nayal/Documents/ImageProcessingTools/images/image.jpg")
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
