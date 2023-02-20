@@ -70,7 +70,7 @@ if __name__=='__main__':
     conv_img_rgb = convolve(rgb, kernel, pad=1)
 
     plt.figure(figsize=(16,10))
-    plt.subplot(131);plt.imshow(rgb, cmap='gray') ; plt.title("Image") 
+    plt.subplot(131);plt.imshow(rgb, cmap='gray') ; plt.title("RGB Image") 
     plt.subplot(132);plt.imshow(conv_img_g, cmap="gray") ; plt.title("Gray Convolved Image") 
     plt.subplot(133);plt.imshow(conv_img_rgb) ; plt.title("RGB Convolved Image") 
 
