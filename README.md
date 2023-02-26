@@ -1,6 +1,6 @@
 # Image-Processing-and-Augmentation-Tools
 
-This library contains some numpy image processing and augmentation tools which will be updated frequently.
+This library contains some image processing and augmentation tools. This repository will be updated frequently with some new tools and features.
 
 **Mixup**
 ![Mixup](images/mixup.png?raw=true)

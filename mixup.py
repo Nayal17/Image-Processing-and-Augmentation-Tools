@@ -10,16 +10,15 @@ def mixup(images, labels, alpha=1.5):
     """
     bs = images.shape[0]
     idxs = np.random.permutation(bs)
-    lamda = np.random.beta(alpha, alpha, size=bs) # alpha=beta to avoid skewed distribution 
+    lamda = np.random.beta(alpha, alpha, size=bs)[0] # alpha=beta to avoid skewed distribution 
     
     # mixing up images 
-    images = lamda.reshape(bs, 1, 1, 1) * images + (1-lamda).reshape(bs, 1, 1, 1) * images[idxs]
+    images = lamda * images + (1-lamda) * images[idxs]
 
     # mixing up labels
-    labels = lamda.reshape(bs, 1) * labels + (1-lamda).reshape(bs, 1) * labels[idxs]
+    labels = lamda * labels + (1-lamda) * labels[idxs]
 
     images = images.astype(np.uint8)
-
     return images, labels
 
 if __name__=='__main__':
