@@ -2,6 +2,11 @@
 
 This library contains some numpy image processing and augmentation tools which will be updated frequently.
 
+**Mixup**
+![Mixup](images/mixup.png?raw=true)
+
+
+
 **Random Cutout**
 ![Random Cutout](images/random_cutout.png?raw=true)
 
