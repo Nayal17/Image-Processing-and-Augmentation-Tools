@@ -12,6 +12,11 @@ This library contains some image processing and augmentation tools. This reposit
 
 
 
+**Blur**
+![Blur](images/blur.png?raw=true)
+
+
+
 **Convolve color and grayscale images**
 ![Random Cutout](images/convolved.png?raw=true)
 
