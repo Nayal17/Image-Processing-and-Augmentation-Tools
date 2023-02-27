@@ -32,6 +32,7 @@ def convolve2d(img, kernel, pad=0, stride=1):
                     if x%stride==0:
                         out_img[x,y] = (padded_img[x:x+kernel_height, y:y+kernel_width] * kernel).sum()
 
+        out_img = out_img.astype(np.uint8)
         return out_img
 
 def color_convolve(img, kernel, pad=0, stride=1):
@@ -49,16 +50,17 @@ def color_convolve(img, kernel, pad=0, stride=1):
 
 if __name__=='__main__':
 
-    kernel = np.array([[0,-1,0],[-1,5,-1],[0,-1,0]])
+    kernel = np.array([[-1,-1,-1],[-1,5,-1],[-1,-1,-1]])
 
     img = cv2.imread("/home/nayal/Documents/ImageProcessingTools/images/image.jpg")
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     gray_conv_img = convolve2d(gray, kernel, pad=1)
-    color_conv_img = color_convolve(img, kernel, pad=1)
+    color_conv_img = color_convolve(rgb_img, kernel, pad=1)
     
     plt.figure(figsize=(16,10))
-    plt.subplot(131); plt.imshow(img); plt.title("BGR Image")
+    plt.subplot(131); plt.imshow(rgb_img); plt.title("RGB Image")
     plt.subplot(132); plt.imshow(gray_conv_img, cmap="gray"); plt.title("Convolve2d Image")
     plt.subplot(133); plt.imshow(color_conv_img); plt.title("Color Convolve Image")
     plt.show()
