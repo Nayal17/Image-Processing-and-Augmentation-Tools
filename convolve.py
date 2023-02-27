@@ -32,6 +32,8 @@ def convolve2d(img, kernel, pad=0, stride=1):
                     if x%stride==0:
                         out_img[x,y] = (padded_img[x:x+kernel_height, y:y+kernel_width] * kernel).sum()
 
+        
+        out_img = (out_img - out_img.min()) / (out_img.max() - out_img.min()) * 255
         out_img = out_img.astype(np.uint8)
         return out_img
 
