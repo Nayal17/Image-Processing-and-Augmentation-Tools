@@ -7,6 +7,11 @@ This library contains some image processing and augmentation tools. This reposit
 
 
 
+**Cutmix**
+![Cutmix](images/cutmix.png?raw=true)
+
+
+
 **Random Cutout**
 ![Random Cutout](images/random_cutout.png?raw=true)
 
